@@ -40,6 +40,30 @@ public class QuickFindTest {
         assertFalse(quickFind.connected(0, 2));
     }
 
+
+
+    @Test
+    public void testUnionPassCustom() {
+
+        int sz1 = 9;
+        int[] roots1 = getBasicRootsArray(sz1);
+        QuickFind quickFind = new QuickFind(roots1);
+
+
+
+        quickFind.union(0, 1);
+        quickFind.union(0, 2);
+        quickFind.union(1, 3);
+        quickFind.union(4, 8);
+        quickFind.union(5,6);
+        quickFind.union(5, 7);
+        assertFalse(quickFind.connected(0, 4));
+
+        quickFind.union(0, 4);
+
+        assertFalse(quickFind.connected(0, 2));
+    }
+
     private int[] getBasicRootsArray(int sz1) {
 
         int[] roots = new int[sz1];

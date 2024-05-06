@@ -1,22 +1,23 @@
 package com.me.DSA.tree.structure;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
+import lombok.*;
 @NoArgsConstructor
-public class TreeNode {
+@Data
+public class TreeNode<T extends Comparable<T>> implements Comparable<TreeNode<T>> {
 
-    private int val;
-    private TreeNode left, right;
+    private T val;
+    private TreeNode<T> left;
+    private TreeNode<T> right;
 
-    public TreeNode(int val) {
+    public TreeNode(T val) {
         this.val = val;
         this.left = null;
         this.right = null;
+    }
+
+    @Override
+    public int compareTo(TreeNode<T> o) {
+        return this.val.compareTo(o.val);
     }
 }
