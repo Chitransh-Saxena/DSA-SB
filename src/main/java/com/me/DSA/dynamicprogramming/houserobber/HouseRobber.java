@@ -1,6 +1,6 @@
 package com.me.DSA.dynamicprogramming.houserobber;
 
-public interface BasicApproachHouseRobber {
+public interface HouseRobber {
 
     int rob(int[] money);
 }
