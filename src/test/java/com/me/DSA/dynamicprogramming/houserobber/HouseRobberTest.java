@@ -16,5 +16,8 @@ public class HouseRobberTest {
 
         money = new int[]{2, 7, 9, 3, 1};
         Assert.assertEquals(12, robber.rob(money));
+
+        money = new int[]{0};
+        Assert.assertEquals(0, robber.rob(money));
     }
 }
