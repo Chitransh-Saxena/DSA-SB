@@ -1,4 +1,4 @@
-package com.me.DSA;
+package com.me.DSA.graph;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.me.DSA;
+package com.me.DSA.graph;
 
 import com.me.DSA.graph.structures.DijkstraAlgorithm;
 import com.me.DSA.graph.structures.Graph;
