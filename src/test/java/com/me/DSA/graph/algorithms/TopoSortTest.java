@@ -4,10 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TopoSortTest {
 
@@ -77,5 +74,39 @@ public class TopoSortTest {
 
         List<Integer> sorted = topo.topoSortImproved(graph);
         System.out.println(sorted);
+    }
+
+    @Test
+    public void testTopoSortWithoutCycleSuccess() {
+
+        TopoSort topo = new TopoSort();
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+
+        graph.put(5, List.of(6,7));
+        graph.put(1, List.of(3));
+        graph.put(2, Arrays.asList(3, 4));
+        graph.put(3, List.of(5));
+        graph.put(4, List.of(7));
+        graph.put(7, List.of(8));
+        graph.put(8, List.of());
+
+
+        List<Integer> sorted = topo.topoSortImproved(graph);
+        System.out.println(sorted);
+    }
+
+
+    @Test
+    public void randomTest() {
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(1);
+        pq.add(2);
+        pq.add(3);
+
+        Iterator i = pq.iterator();
+        System.out.println(i.next());
+        System.out.println(i.next());
+        System.out.println(i.next());
     }
 }

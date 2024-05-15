@@ -44,45 +44,36 @@ public class TopoSort {
 
 
     public List<Integer> topoSortImproved(Map<Integer, List<Integer>> graph) {
-
         List<Integer> res = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
         Stack<Integer> iterated = new Stack<>();
-        Stack<Integer> inRecursion = new Stack<>();
 
-        for(Map.Entry<Integer, List<Integer>> entry: graph.entrySet()) {
-
-            int node = entry.getKey();
-            if(visited.contains(node))  continue;
-            for(Integer child: entry.getValue()) {
-                if(!topoImprovedDfs(child, graph, visited, iterated, inRecursion)) {
-                    throw new IllegalArgumentException("There are cycles in graph");
+        for (Integer node : graph.keySet()) {
+            if (!visited.contains(node)) {
+                if (!topoImprovedDfs(node, graph, visited, iterated, new HashSet<>())) {
+                    throw new IllegalArgumentException("There are cycles in the graph");
                 }
             }
-
         }
 
-        while(!iterated.isEmpty()) {
+        while (!iterated.isEmpty()) {
             res.add(iterated.pop());
         }
 
         return res;
-
     }
 
-    private boolean topoImprovedDfs(Integer node, Map<Integer, List<Integer>> graph, Set<Integer> visited, Stack<Integer> iterated, Stack<Integer> inRecursion) {
+    private boolean topoImprovedDfs(Integer node, Map<Integer, List<Integer>> graph, Set<Integer> visited, Stack<Integer> iterated, Set<Integer> inRecursion) {
+        if (inRecursion.contains(node)) {
+            return false; // Cycle detected
+        }
 
-        // do not check for visited. I detect cycles via removing this logic
+        if(visited.contains(node))  return true;
         visited.add(node);
         inRecursion.add(node);
 
-        for(Integer child: graph.get(node)) {
-
-            if(!visited.contains(child)) {
-                if(!topoImprovedDfs(child, graph, visited, iterated, inRecursion)) {
-                    return false;
-                }
-            } else if(inRecursion.contains(child)) {
+        for (Integer child : graph.getOrDefault(node, Collections.emptyList())) {
+            if (!topoImprovedDfs(child, graph, visited, iterated, inRecursion)) {
                 return false;
             }
         }
